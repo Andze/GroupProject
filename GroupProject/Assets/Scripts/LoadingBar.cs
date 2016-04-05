@@ -14,5 +14,9 @@ public class LoadingBar : MonoBehaviour {
     {
         Image image = GetComponent<Image>();
         image.fillAmount = Mathf.MoveTowards(image.fillAmount, 1f, Time.deltaTime * .10f);   
+        if (image.fillAmount == 1f)
+        {
+            image.fillAmount = 0f;
+        }
     }
 }
