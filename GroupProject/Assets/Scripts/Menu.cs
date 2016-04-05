@@ -7,12 +7,14 @@ public class Menu : MonoBehaviour
     public Canvas Main;
     public Canvas Options;
     public Canvas Rules;
-
+    public Canvas Loading;
+  
 
     void Awake()
     {
         Options.enabled = false;
         Rules.enabled = false;
+        Loading.enabled = false;
     }
     public void OptionsOn()
     {
@@ -39,6 +41,16 @@ public class Menu : MonoBehaviour
     }
     public void LoadOn()
     {
-        Application.LoadLevel (1);
+        StartCoroutine(waiter());
+        Main.enabled = false;
+        Loading.enabled = true;
+    }
+
+    IEnumerator waiter()
+    {
+        int wait_time = Random.Range(5, 15);
+        yield return new WaitForSeconds(wait_time);
+        print("I waited for " + wait_time + "sec");
+        Application.LoadLevel(1);
     }
 }
