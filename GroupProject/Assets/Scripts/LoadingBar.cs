@@ -7,6 +7,7 @@ public class LoadingBar : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         Image image = GetComponent<Image>();
+        image.fillAmount = 0f;
     }
 	
 	// Update is called once per frame
