@@ -333,7 +333,8 @@ public class GameController : MonoBehaviour
 
     double Greed()
     {
-        double x, y;
+        double x = 0;
+        double y = 0;
         double.TryParse(CurrentBet.text, out y);
         double.TryParse(Player2Cash.text, out x);
         //400,000 is the highest possible aamount of money in the game as such it's our 100% value
