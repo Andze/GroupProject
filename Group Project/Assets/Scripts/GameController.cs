@@ -246,9 +246,9 @@ public class GameController : MonoBehaviour
         double R = Random.value;
         double T = 0.35;
         double Q = 0;
-         Q =( (L * 0.4) + (0.1 * C) + (0.4 * G) + R)/10;
+        Q = ((L * 0.4) / 10) + ((0.1 * C) / 10) + ((0.4 * G) / 10) + (0.1 * R);
 
-        Debug.Log(Q);
+      //  Debug.Log(Q);
         if (Q >= T)
         {
             Player2.Push(deck.Pop());
@@ -346,31 +346,31 @@ public class GameController : MonoBehaviour
         //400,000 is the highest possible aamount of money in the game as such it's our 100% value
         x = x / 4000;   y = y / 4000;
 
-        if (x > y * 2)
+        if (x < y * 2)
         {
             return 10;
         }
-        if (x < 10)
+        if (y < 10)
             return 0;
-        else if (x > 10 && x < 20)
+        else if (y > 10 && y < 20)
             return 1;
-        else if (x > 20 && x < 30)
+        else if (y > 20 && y < 30)
             return 2;
-        else if (x > 30 && x < 40)
+        else if (y > 30 && y < 40)
             return 3;
-        else if (x > 40 && x < 50)
+        else if (y > 40 && y < 50)
             return 4;
-        else if (x > 50 && x < 60)
+        else if (y > 50 && y < 60)
             return 5;
-        else if (x > 60 && x < 70)
+        else if (y > 60 && y < 70)
             return 6;
-        else if (x > 70 && x < 80)
+        else if (y > 70 && y < 80)
             return 7;
-        else if (x > 80 && x < 90)
+        else if (y > 80 && y < 90)
             return 8;
-        else if (x > 90 && x < 99)
+        else if (y > 90 && y < 99)
             return 9;
         else
-            return 10;
+            return 0;
     }
 }
