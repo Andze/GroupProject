@@ -190,7 +190,7 @@ public class GameController : MonoBehaviour
             }
             else if (player.HandValue() > Player2.HandValue() && player.HandValue() <= 21 && Player2.HandValue() <= 21 || player.HandValue() < Player2.HandValue() && player.HandValue() <= 21 && Player2.HandValue() > 21)
             {
-                WinnerText.text = "player 1 Wins!";
+                WinnerText.text = "Player 1 Wins!";
                 int.TryParse(CurrentBet.text, out y);
                 int.TryParse(Player1Liqudity.text, out z);
                 z += y;
@@ -202,7 +202,7 @@ public class GameController : MonoBehaviour
             }
             else if (Player2.HandValue() >= player.HandValue() && Player2.HandValue() <= 21 && player.HandValue() <= 21 || Player2.HandValue() < player.HandValue() && Player2.HandValue() <= 21 && player.HandValue() > 21)
             {
-                WinnerText.text = "player 2 Wins!";
+                WinnerText.text = "Player 2 Wins!";
                 int.TryParse(CurrentBet.text, out y);
                 int.TryParse(Player2Cash.text, out x);
                 x += y;
