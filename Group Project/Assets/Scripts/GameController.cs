@@ -26,6 +26,9 @@ public class GameController : MonoBehaviour
     public Button PlayAgainButton;
 
     public Text WinnerText;
+
+   
+
     /*
      * Cards dealt to each player
      * First player hits/sticks/bust
@@ -109,6 +112,8 @@ public class GameController : MonoBehaviour
     }
 
     #endregion
+
+   
 
     void StartGame()
     {
@@ -232,7 +237,8 @@ public class GameController : MonoBehaviour
             StartCoroutine(DealersTurn());
            
         }
-        yield return new WaitForSeconds(1f);
+        //Time the Ai waits
+        yield return new WaitForSeconds(Random.Range(2, 6));
         double L = GameLogic();
         L *= 10;
         double C = Player2Con;
