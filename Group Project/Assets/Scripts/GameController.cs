@@ -238,15 +238,21 @@ public class GameController : MonoBehaviour
            
         }
         //Time the Ai waits
-        yield return new WaitForSeconds(Random.Range(2, 6));
-        double L = GameLogic();
-        L *= 10;
-        double C = Player2Con;
-        double G = Greed();
-        double R = Random.value;
-        double T = 0.35;
-        double Q = 0;
-        Q = ((L * 0.4) / 10) + ((0.1 * C) / 10) + ((0.4 * G) / 10) + (0.1 * R);
+		if (Player2.HandValue () > 0 && Player2.HandValue() < 11) {
+			yield return new WaitForSeconds (Random.Range (2, 4));
+		} else if (Player2.HandValue() > 10 && Player2.HandValue() < 18) {
+			yield return new WaitForSeconds (Random.Range (3, 5));
+		}else if (Player2.HandValue () > 17) {
+			yield return new WaitForSeconds (Random.Range (5, 7));
+		}
+		double L = GameLogic();
+		L *= 10;
+		double C = Player2Con;
+		double G = Greed();
+		double R = Random.value;
+		double T = 0.35;
+		double Q = 0;
+		Q = ((L * 0.4) / 10) + ((0.1 * C) / 10) + ((0.4 * G) / 10) + (0.1 * R);
 
       //  Debug.Log(Q);
         if (Q >= T)
