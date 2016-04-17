@@ -92,29 +92,16 @@ public class GameController : MonoBehaviour
         WinnerText.text = " ";
         StartGame();
     }
-    public void chip25()
+    public void chip25(int x)
     {
-        int x;
-        int.TryParse(Input.text, out x);
-        Input.text = (x+25).ToString();
+        int y = 0;
+        int.TryParse(Input.text, out y);
+
+        Input.text = (x + y).ToString();
         
     }
 
-    public void chip50()
-    {
-        int x;
-        int.TryParse(Input.text, out x);
-        Input.text = (x + 50).ToString();
-
-    }
-
-    public void chip75()
-    {
-        int x;
-        int.TryParse(Input.text, out x);
-        Input.text = (x + 75).ToString();
-
-    }
+   
     public void Updatebet()
     {
 
