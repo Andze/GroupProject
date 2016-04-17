@@ -14,23 +14,29 @@ Platform assembly: C:\Users\Auryn\Documents\GitHub\GroupProject\Executable\black
 Loading C:\Users\Auryn\Documents\GitHub\GroupProject\Executable\blackjack_test_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
 Platform assembly: C:\Users\Auryn\Documents\GitHub\GroupProject\Executable\blackjack_test_Data\Managed\UnityEngine.Networking.dll (this message is harmless)
 Loading C:\Users\Auryn\Documents\GitHub\GroupProject\Executable\blackjack_test_Data\Managed\UnityEngine.Networking.dll into Unity Child Domain
-- Completed reload, in  0.039 seconds
+- Completed reload, in  0.042 seconds
 Platform assembly: C:\Users\Auryn\Documents\GitHub\GroupProject\Executable\blackjack_test_Data\Managed\System.Core.dll (this message is harmless)
 Platform assembly: C:\Users\Auryn\Documents\GitHub\GroupProject\Executable\blackjack_test_Data\Managed\System.dll (this message is harmless)
 desktop: 1920x1080 60Hz; virtual: 3744x1093 at 0,0
 <RI> Initializing input.
 <RI> Input initialized.
 <RI> Initialized touch support.
-UnloadTime: 0.487379 ms
+UnloadTime: 89.672592 ms
 Setting up 1 worker threads for Enlighten.
-  Thread -> id: 2770 -> priority: 1 
+  Thread -> id: 211c -> priority: 1 
 I waited for 6sec
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 37)
 
 Unloading 4 Unused Serialized files (Serialized files now loaded: 0)
-UnloadTime: 3.595525 ms
+UnloadTime: 3.394942 ms
 
-Unloading 19 unused Assets to reduce memory usage. Loaded Objects now: 639.
-Total: 0.403803 ms (FindLiveObjects: 0.043107 ms CreateObjectMapping: 0.017008 ms MarkObjects: 0.322280 ms  DeleteObjects: 0.020820 ms)
+Unloading 19 unused Assets to reduce memory usage. Loaded Objects now: 667.
+Total: 0.565677 ms (FindLiveObjects: 0.025219 ms CreateObjectMapping: 0.021700 ms MarkObjects: 0.498523 ms  DeleteObjects: 0.019940 ms)
+
+Unloading 2 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 1.074464 ms
+
+Unloading 66 unused Assets to reduce memory usage. Loaded Objects now: 302.
+Total: 0.295888 ms (FindLiveObjects: 0.020527 ms CreateObjectMapping: 0.012316 ms MarkObjects: 0.218470 ms  DeleteObjects: 0.043987 ms)
 

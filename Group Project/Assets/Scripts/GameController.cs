@@ -42,24 +42,39 @@ public class GameController : MonoBehaviour
 
     public void Hit()
     {
-        player.Push(deck.Pop());
-        if (player.HandValue() > 21)
+        if (CurrentBet.text == "0")
         {
-            // TODO: The player is bust
-            hitButton.interactable = false;
-            stickButton.interactable = false;
-            Input.interactable = false;
-            StartCoroutine(AITurn());
+            WinnerText.text = "Please place a bet.";
         }
-
+        else
+        {
+            WinnerText.text = "";
+            player.Push(deck.Pop());
+            if (player.HandValue() > 21)
+            {
+                // TODO: The player is bust
+                hitButton.interactable = false;
+                stickButton.interactable = false;
+                Input.interactable = false;
+                StartCoroutine(AITurn());
+            }
+        }
     }
 
     public void Stick()
     {
-        Input.interactable = false;
-        hitButton.interactable = false;
-        stickButton.interactable = false;
-        StartCoroutine(AITurn());       //line below must be deleted and added in when the algoritham has finished it's turn 
+        if (CurrentBet.text == "0")
+        {
+            WinnerText.text = "Please place a bet.";
+        }
+        else
+        {
+            WinnerText.text = "";
+            Input.interactable = false;
+            hitButton.interactable = false;
+            stickButton.interactable = false;
+            StartCoroutine(AITurn());       //line below must be deleted and added in when the algoritham has finished it's turn 
+        }
     }
     public void PlayAgain()
     {
@@ -76,6 +91,29 @@ public class GameController : MonoBehaviour
         Input.interactable = true;
         WinnerText.text = " ";
         StartGame();
+    }
+    public void chip25()
+    {
+        int x;
+        int.TryParse(Input.text, out x);
+        Input.text = (x+25).ToString();
+        
+    }
+
+    public void chip50()
+    {
+        int x;
+        int.TryParse(Input.text, out x);
+        Input.text = (x + 50).ToString();
+
+    }
+
+    public void chip75()
+    {
+        int x;
+        int.TryParse(Input.text, out x);
+        Input.text = (x + 75).ToString();
+
     }
     public void Updatebet()
     {
