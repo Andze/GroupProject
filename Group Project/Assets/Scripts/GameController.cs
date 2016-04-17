@@ -26,8 +26,10 @@ public class GameController : MonoBehaviour
     public Button PlayAgainButton;
 
     public Text WinnerText;
+    public Text playing;
 
-   
+
+
 
     /*
      * Cards dealt to each player
@@ -144,6 +146,7 @@ public class GameController : MonoBehaviour
 
     IEnumerator DealersTurn()
     {
+        WinnerText.text = "Dealers' turn";
         int y = 0;
         int x = 0;
         int z = 0;
@@ -230,7 +233,7 @@ public class GameController : MonoBehaviour
     }
     IEnumerator AITurn()
     {
-
+        WinnerText.text = "Player 2's turn";
         if (Player2.HandValue() > 20)
         {
             StopAllCoroutines();
