@@ -124,6 +124,7 @@ public class GameController : MonoBehaviour
             player.Push(deck.Pop());
             Player2.Push(deck.Pop());
             HitDealer();
+         
         }
     }
 
