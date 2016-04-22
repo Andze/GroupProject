@@ -27,7 +27,9 @@ public class GameController : MonoBehaviour
 
     public Text WinnerText;
     public Text playing;
-
+    public bool usernameset = false;
+    public string[] usernames = new string[] { "meddlesomezeal", "boldrookery", "physicalswarm", "pleasingcovey", "queasyoptimism" };
+    public string username;
 
 
 
@@ -146,6 +148,13 @@ public class GameController : MonoBehaviour
     {
         for (int i = 0; i < 2; i++)
         {
+            if (usernameset == false)
+            {
+                username = usernames[Random.Range(0, 4)];
+                usernameset = true;
+
+            }
+            else
             player.Push(deck.Pop());
             Player2.Push(deck.Pop());
             HitDealer();
@@ -236,7 +245,7 @@ public class GameController : MonoBehaviour
             }
             else if (Player2.HandValue() >= player.HandValue() && Player2.HandValue() <= 21 && player.HandValue() <= 21 || Player2.HandValue() < player.HandValue() && Player2.HandValue() <= 21 && player.HandValue() > 21)
             {
-                WinnerText.text = "Player 2 Wins!";
+                WinnerText.text = username + " Wins!";
                 int.TryParse(CurrentBet.text, out y);
                 int.TryParse(Player2Cash.text, out x);
                 x += y;
@@ -259,7 +268,7 @@ public class GameController : MonoBehaviour
     }
     IEnumerator AITurn()
     {
-        WinnerText.text = "Player 2's turn";
+        WinnerText.text = username + "'s turn";
         if (Player2.HandValue() > 20)
         {
             StopAllCoroutines();
