@@ -3,6 +3,7 @@ using System.Collections;
 using UnityEngine.UI;
 
 
+
 public class GameController : MonoBehaviour 
 {
     int dealersFirstCard = -1;
@@ -11,6 +12,9 @@ public class GameController : MonoBehaviour
     public CardStack Player2;
     public CardStack dealer;
     public CardStack deck;
+    public int WaitTime = 3;
+    public Text Player2Name;
+    public float PintUpdateTime = 0.5f;
 
     public InputField Input;
     public Text CurrentBet;
@@ -20,6 +24,9 @@ public class GameController : MonoBehaviour
     public int Player2Con = 5;
     public int DealerCon = 5;
     public int hitValue = 0;
+    public double T = 0.35;
+    public Image PingBar;
+    
 
     public Button hitButton;
     public Button stickButton;
@@ -142,7 +149,12 @@ public class GameController : MonoBehaviour
 
     #endregion
 
-   
+    IEnumerator wait(float T)
+    {
+        yield return new WaitForSeconds(T);
+        PingBar.fillAmount = Random.Range(0.7f, 0.99f);
+        StartCoroutine(wait(PintUpdateTime));
+    }
 
     void StartGame()
     {
@@ -150,8 +162,10 @@ public class GameController : MonoBehaviour
         {
             if (usernameset == false)
             {
-                username = usernames[Random.Range(0, 4)];
+                username = usernames[Random.Range(0, usernames.Length)];
+                Player2Name.text = username + ": £";
                 usernameset = true;
+                StartCoroutine(wait(PintUpdateTime));
 
             }
             else
@@ -182,10 +196,10 @@ public class GameController : MonoBehaviour
     IEnumerator DealersTurn()
     {
         WinnerText.text = "Dealers' turn";
-        int y = 0;
-        int x = 0;
-        int z = 0;
-        int i = 0;
+        float y = 0;
+        float x = 0;
+        float z = 0;
+        float i = 0;
         hitButton.interactable = false;
         stickButton.interactable = false;
         CardStackView view = dealer.GetComponent<CardStackView>();
@@ -218,9 +232,9 @@ public class GameController : MonoBehaviour
             else if (dealer.HandValue() > 21 && player.HandValue() <= 21 && Player2.HandValue() <= 21)
             {
                 WinnerText.text = "both players win, pot is split!";
-                int.TryParse(CurrentBet.text, out y);
-                int.TryParse(Player1Liqudity.text, out z);
-                int.TryParse(Player2Cash.text, out x);
+                float.TryParse(CurrentBet.text, out y);
+                float.TryParse(Player1Liqudity.text, out z);
+                float.TryParse(Player2Cash.text, out x);
                 y = y / 2;
                 z += y;
                 x += y;
@@ -233,11 +247,11 @@ public class GameController : MonoBehaviour
             }
             else if (player.HandValue() > Player2.HandValue() && player.HandValue() <= 21 && Player2.HandValue() <= 21 || player.HandValue() < Player2.HandValue() && player.HandValue() <= 21 && Player2.HandValue() > 21)
             {
-                WinnerText.text = "Player 1 Wins!";
-                int.TryParse(CurrentBet.text, out y);
-                int.TryParse(Player1Liqudity.text, out z);
+                WinnerText.text = "You Win!";
+                float.TryParse(CurrentBet.text, out y);
+                float.TryParse(Player1Liqudity.text, out z);
                 z += y;
-                Player1Liqudity.text = z.ToString();
+                Player1Liqudity.text = z.ToString("2F");
                 CurrentBet.text = "0";
                 Player1Con++;
                 Player2Con--;
@@ -246,8 +260,8 @@ public class GameController : MonoBehaviour
             else if (Player2.HandValue() >= player.HandValue() && Player2.HandValue() <= 21 && player.HandValue() <= 21 || Player2.HandValue() < player.HandValue() && Player2.HandValue() <= 21 && player.HandValue() > 21)
             {
                 WinnerText.text = username + " Wins!";
-                int.TryParse(CurrentBet.text, out y);
-                int.TryParse(Player2Cash.text, out x);
+                float.TryParse(CurrentBet.text, out y);
+                float.TryParse(Player2Cash.text, out x);
                 x += y;
                 Player2Cash.text = x.ToString();
                 CurrentBet.text = "0";
@@ -277,18 +291,18 @@ public class GameController : MonoBehaviour
         }
         //Time the Ai waits
 		if (Player2.HandValue () > 0 && Player2.HandValue() < 11) {
-			yield return new WaitForSeconds (Random.Range (2, 4));
+			yield return new WaitForSeconds (Random.Range (WaitTime--, WaitTime++));
 		} else if (Player2.HandValue() > 10 && Player2.HandValue() < 18) {
-			yield return new WaitForSeconds (Random.Range (3, 5));
+			yield return new WaitForSeconds (Random.Range (WaitTime, WaitTime + 2));
 		}else if (Player2.HandValue () > 17) {
-			yield return new WaitForSeconds (Random.Range (5, 7));
+			yield return new WaitForSeconds (Random.Range (WaitTime + 3, WaitTime + 5));
 		}
 		double L = GameLogic();
 		L *= 10;
 		double C = Player2Con;
 		double G = Greed();
 		double R = Random.value;
-		double T = 0.35;
+		
 		double Q = 0;
 		Q = ((L * 0.4) / 10) + ((0.1 * C) / 10) + ((0.4 * G) / 10) + (0.1 * R);
 
@@ -301,8 +315,7 @@ public class GameController : MonoBehaviour
         else
         {
             StopAllCoroutines();
-            StartCoroutine(DealersTurn());
-            yield return new WaitForSeconds(30f);
+            StartCoroutine(DealersTurn());     
         }
 
     }
@@ -338,45 +351,33 @@ public class GameController : MonoBehaviour
     }
     void AIBet()
     {
-        int StartingBet = 0;
-        int Playercash = 0;
-        int PlayerBet = 0;
-        int.TryParse(Player2Cash.text, out StartingBet);
-        int temp = StartingBet;
-        StartingBet = StartingBet / 5;
+        float StartingBet = 0;
+        float Playercash = 0;
+        float PlayerBet = 0;
+        float.TryParse(Player2Cash.text, out StartingBet);
+        float temp = StartingBet;
 
-        int.TryParse(Player1Liqudity.text, out Playercash);
-        int.TryParse(CurrentBet.text, out PlayerBet);
+
+        float.TryParse(Player1Liqudity.text, out Playercash);
+        float.TryParse(CurrentBet.text, out PlayerBet);
         PlayerBet = PlayerBet / 2;
 
-        int BettingDifference = PlayerBet - StartingBet;
+        Playercash += PlayerBet;
 
+        float BetPer = PlayerBet/Playercash;
 
-        if (BettingDifference == 0)
-        {
-            StartingBet += 5;
-        }
-        else if (BettingDifference > StartingBet)
-        {
-            StartingBet *= 2;
-            if (StartingBet > temp)
-            {
-                StartingBet -= BettingDifference;
+        StartingBet *= BetPer;
 
-            }
-        }
-        else if ((StartingBet * 2) < PlayerBet)
-            StartingBet *= 2;
-
+        Mathf.Round(StartingBet);
 
 
         PlayerBet *= 2;
         temp -= StartingBet;
-        Player2Cash.text = temp.ToString();
+        Player2Cash.text = temp.ToString("F2");
 
         PlayerBet += (StartingBet * 2);
 
-        CurrentBet.text = PlayerBet.ToString();
+        CurrentBet.text = PlayerBet.ToString("F2");
 
 
     }
